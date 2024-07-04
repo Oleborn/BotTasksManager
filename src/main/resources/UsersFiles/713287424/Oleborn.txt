@@ -1,0 +1,9 @@
+Name☼Oleborn
+ID☼713287424
+CommunicationMode☼DEFAULT
+SelfName☼Денис
+DateOfBirthday☼!!!%%%!!!%%%5
+GMT☼4
+AboutSelf☼!!!%%%!!!%%%3
+listPersonIn☼null
+listPersonOut☼null
