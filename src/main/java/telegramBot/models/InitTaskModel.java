@@ -6,7 +6,7 @@ import telegramBot.controllers.filesController.implementations.UserDTOActionsImp
 import java.io.IOException;
 
 public class InitTaskModel {
-    public TasksModel initTaskModel(Update update, Long dateOutput) throws IOException {
+    public TasksModel initTaskModel(Update update, Long dateOutput) {
         UserDTO userDTO = new UserDTOActionsImpl().loadUserDTO(update);
         return TasksModel.builder()
                 .id(update.getMessage().getFrom().getId())

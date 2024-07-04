@@ -16,10 +16,8 @@ public class TextHandlerInputGMT implements TextHandler {
     UserDTOActionsImpl userDTOActions = new UserDTOActionsImpl();
 
     @Override
-    public void textHandlerToCommunicationMode(Update update) throws TelegramApiException, IOException {
-        if (update.getMessage().getText().startsWith("/")) {
-            new OutputsMethods().outputMessage(update.getMessage().getFrom().getId(), "<b>Вы ввели что-то не то!</b> \n\n <i>Можно ввести только цифры от -12 до +12!</i>");
-        } else if (!update.getMessage().getText().matches("^-?(1[0-2]|[1-9]|0)$|^[+](1[0-2]|[1-9])$")) {
+    public void textHandlerToCommunicationMode(Update update) {
+        if (update.getMessage().getText().startsWith("/")|| !update.getMessage().getText().matches("^-?(1[0-2]|[1-9]|0)$|^[+](1[0-2]|[1-9])$")) {
             new OutputsMethods().outputMessage(update.getMessage().getFrom().getId(), "<b>Вы ввели что-то не то!</b> \n\n <i>Можно ввести только цифры от -12 до +12!</i>");
         } else {
             UserDTO userDTO = userDTOActions.loadUserDTO(update);

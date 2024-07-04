@@ -40,7 +40,16 @@ public class ProfileServices {
 
     public void deleteProfile(Update update) {
         new OutputsMethods().outputMessage(update.getCallbackQuery().getFrom().getId(),
-                "/Бот/ \n\n Да ладно тебе, какой удалить? Оставайся, со мной интересно же! \n\nНе гони давай))) жмакай лучше /start");
+                """
+                <b>/Бот/</b>
+                
+                <em>Да ладно тебе, какой удалить? </em>
+                <em>Оставайся, со мной интересно же!😏</em>
+                
+                <i>Не гони давай,  🫵  ты нужен здесь!</i>
+                
+                <i><b>Жмакай лучше /start!</b></i>
+                """);
     }
 
     public void editNameProfiles(Update update) {
@@ -49,7 +58,11 @@ public class ProfileServices {
         new UserDTOActionsImpl().saveUserDTO(update, userDTO);
         new ServiceFiles().setCommunicationMode(update, CommunicationMode.INPUTNAME);
         new OutputsMethods().outputMessage(update.getCallbackQuery().getFrom().getId(),
-                "Ну вводи новое имя!)) Я записываю!");
+                """
+                    <em>Ну вводи свое новое имя!😉 
+                    
+                     Я записываю!</em>
+                        """);
     }
 
     public void editGmtProfiles(Update update) {

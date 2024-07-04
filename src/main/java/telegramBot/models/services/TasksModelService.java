@@ -20,7 +20,7 @@ public class TasksModelService {
 
     ServiceFiles serviceFiles = new ServiceFiles();
 
-    public void handlerTasksModelGetText(Update update) throws IOException {
+    public void handlerTasksModelGetText(Update update) {
         LogsConfiguration.writeLog("Запущен метод handlerTasksModelGetText для " + update.getMessage().getFrom().getUserName());
         TasksModelActionsImpl tasksModelActions = new TasksModelActionsImpl();
         TasksModel tasksModel = new InitTaskModel().initTaskModel(update, null); //создает модель таски без даты отправки
@@ -29,7 +29,7 @@ public class TasksModelService {
         serviceFiles.setCommunicationMode(update, CommunicationMode.INPUTDATE);
     }
 
-    public void handlerTasksModelGetDate(Update update) throws IOException, ParseException {
+    public void handlerTasksModelGetDate(Update update){
         UserDTO userDTO = new UserDTOActionsImpl().loadUserDTO(update);
         LogsConfiguration.writeLog("Запущен метод handlerTasksModelGetDate для " + update.getMessage().getFrom().getUserName());
         Long nameFile = serviceFiles.checkFilesTasksNoDateOutput(update.getMessage().getFrom().getId()); // возвращает имя файла в котором DateOutput = NULL

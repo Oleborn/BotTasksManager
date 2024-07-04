@@ -15,10 +15,14 @@ public class TasksModelActionsImpl implements TasksModelActions {
     private final String pathUserDTOFiles = "src/main/resources/UsersFiles/";
 
     @Override
-    public void createTask(Update update) throws IOException {
+    public void createTask(Update update) {
         UserDTO userDTO = new UserDTOActionsImpl().loadUserDTO(update);
         LogsConfiguration.writeLog("Запущен метод createTask для " + update.getMessage().getFrom().getUserName());
-        Files.createFile(Path.of(pathUserDTOFiles + update.getMessage().getFrom().getId() + "/tasks/" + (update.getMessage().getDate() + ((userDTO.getGmt()) * 3600)) + ".txt"));
+        try {
+            Files.createFile(Path.of(pathUserDTOFiles + update.getMessage().getFrom().getId() + "/tasks/" + (update.getMessage().getDate() + ((userDTO.getGmt()) * 3600)) + ".txt"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

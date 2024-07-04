@@ -31,7 +31,7 @@ public class ServiceFiles {
         new UserDTOActionsImpl().saveUserDTO(update, userDTO);
     }
 
-    public Long checkFilesTasksNoDateOutput(Long id) throws IOException, ParseException {
+    public Long checkFilesTasksNoDateOutput(Long id){
         String pathTasks = "src/main/resources/UsersFiles/" + id + "/tasks/"; // создает путь к таскам конкретного пользователя
         Long nameFile = null;
         File fileFolder = new File(pathTasks); // получает данные по пути в формате File

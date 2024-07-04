@@ -17,8 +17,8 @@ public class TextHandlerInputTextTask implements TextHandler {
      * @throws IOException
      */
     @Override
-    public void textHandlerToCommunicationMode(Update update) throws TelegramApiException, IOException {
-        if (checkCommand(update)) {
+    public void textHandlerToCommunicationMode(Update update) {
+        if (checkCommand(update, "Введение напоминания чем то прервано...")) {
             new TasksModelService().handlerTasksModelGetText(update);
             new OutputsMethods().outputMessage(update.getMessage().getFrom().getId(), """
                     <b>Текст напоминания принят!</b>

@@ -11,8 +11,8 @@ import java.text.ParseException;
 
 public class TextHandlerInputDate implements TextHandler {
     @Override
-    public void textHandlerToCommunicationMode(Update update) throws TelegramApiException, IOException, ParseException {
-        if (checkCommand(update)) {
+    public void textHandlerToCommunicationMode(Update update) {
+        if (checkCommand(update, "Введение даты чем то прервано...")) {
             new TasksModelService().handlerTasksModelGetDate(update);
             new OutputsMethods().outputMessage(update.getMessage().getFrom().getId(),
                     "<b> \uD83D\uDC4C Время уведомления установлено, напоминание сохранено!  </b>\n");

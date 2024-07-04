@@ -20,7 +20,7 @@ public class TextHandlerUpdateText implements TextHandler {
 
     @Override
     public void textHandlerToCommunicationMode(Update update) {
-        if (checkCommand(update)) {
+        if (checkCommand(update, "Введение обновленного текста чем то прервано...")) {
             List<Long> listNames = new ArrayList<>();
             String pathTasks = "src/main/resources/UsersFiles/" + update.getMessage().getFrom().getId() + "/tasks/"; // создает путь к таскам конкретного пользователя
             File fileFolder = new File(pathTasks); // получает данные по пути в формате File

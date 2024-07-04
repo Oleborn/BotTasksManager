@@ -14,12 +14,12 @@ public class TextHandlerInputSelfName implements TextHandler {
 
     @Override
     public void textHandlerToCommunicationMode(Update update) {
-        if (checkCommand(update)) {
+        if (checkCommand(update, "Введение имени чем то прервано...")) {
             UserDTO userDTO = userDTOActions.loadUserDTO(update);
             userDTO.setSelfName(update.getMessage().getText());
             userDTOActions.saveUserDTO(update, userDTO);
             new OutputsMethods().outputMessage(update.getMessage().getFrom().getId(),
-                    "<b>Я запомнил Ваше имя, " + userDTO.getSelfName() + "!\uD83D\uDE09</b>");
+                    "<b>Я запомнил твое имя, " + userDTO.getSelfName() + "!\uD83D\uDE09</b>");
             new ServiceFiles().setCommunicationMode(update, CommunicationMode.DEFAULT);
             new UserDTOService().setGMT(update);
         }
