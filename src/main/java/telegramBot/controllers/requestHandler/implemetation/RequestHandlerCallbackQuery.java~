@@ -2,13 +2,17 @@ package telegramBot.controllers.requestHandler.implemetation;
 
 import org.glassfish.grizzly.utils.Pair;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import telegramBot.controllers.callbackQueryHandler.implementation.CallbackQueryHandlerForProfile;
 import telegramBot.controllers.callbackQueryHandler.implementation.CallbackQueryHandlerForTasks;
 import telegramBot.controllers.requestHandler.RequestHandler;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 public class RequestHandlerCallbackQuery implements RequestHandler {
     @Override
-    public void requestHandler(Update update) {
+    public void requestHandler(Update update){
         Pair<String, String> pair = handlerCommands(update.getCallbackQuery().getData(), "-");
         switch (pair.getSecond()) {
             case "profile" -> new CallbackQueryHandlerForProfile().setCommands(update, pair.getFirst());

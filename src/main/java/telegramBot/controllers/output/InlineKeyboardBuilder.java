@@ -1,9 +1,11 @@
-package telegramBot.controllers;
+package telegramBot.controllers.output;
 
+import org.glassfish.grizzly.utils.Pair;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -19,7 +21,7 @@ public class InlineKeyboardBuilder {
 
     // Добавить кнопку в текущую строку
     public InlineKeyboardBuilder addButton(String text, String callbackData) {
-        if (currentRow == null || currentRow.size() >= 5) {
+        if (currentRow == null || currentRow.size() >= 9) {
             currentRow = new ArrayList<>();
             keyboard.add(currentRow);
         }
@@ -27,6 +29,29 @@ public class InlineKeyboardBuilder {
         inlineKeyboardButton.setText(text);
         inlineKeyboardButton.setCallbackData(callbackData);
         currentRow.add(inlineKeyboardButton);
+        return this;
+    }
+
+    public InlineKeyboardBuilder addMenuDaysPerMonths(int buttonsPerRow, int rowsCount, HashMap<Integer, Pair<String, String>> buttonsMap, int lengthMonth) {
+
+        int buttonNumber = 1;
+
+        for (int i = 0; i < rowsCount; i++) {
+            currentRow = new ArrayList<>();
+            for (int j = 0; j < buttonsPerRow; j++) {
+                InlineKeyboardButton button = new InlineKeyboardButton();
+                if (buttonNumber <= lengthMonth) {
+                    button.setText(String.valueOf(buttonsMap.get(buttonNumber).getFirst()));
+                    button.setCallbackData(buttonsMap.get(buttonNumber).getSecond());
+                    buttonNumber++;
+                } else {
+                    button.setText(" ");
+                    button.setCallbackData("no");
+                }
+                currentRow.add(button);
+            }
+            keyboard.add(currentRow);
+        }
         return this;
     }
 

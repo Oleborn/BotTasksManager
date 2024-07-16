@@ -4,8 +4,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import telegramBot.controllers.CommandsHandler;
 import telegramBot.controllers.CommunicationMode;
-import telegramBot.controllers.OutputsMethods;
-import telegramBot.models.services.ServiceFiles;
+import telegramBot.controllers.output.OutputsMethods;
+import telegramBot.controllers.services.ServiceFiles;
 
 import java.io.IOException;
 import java.text.ParseException;

@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,4 +19,6 @@ public class TasksModel {
     private Long dateOutput;
     private Boolean statusOutput;
     private Boolean statusUpdated;
+    private LocalTime localTime;
+    private LocalDate localDate;
 }

@@ -5,6 +5,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
 import telegramBot.controllers.output.InlineKeyboardBuilder;
 import telegramBot.controllers.output.OutputsMethods;
+import telegramBot.controllers.output.calendar.Keyboard;
 import telegramBot.controllers.services.ServiceFiles;
 import telegramBot.controllers.services.UserDTOService;
 
@@ -17,14 +18,14 @@ public class CommandsHandler {
                 new OutputsMethods().outputMessageWithCapture(
                         update,
                         """
-                                <b>Привет!</b>
+                        <b>Привет!</b>
 
-                                Я бот который записывает напоминания и присылает их Вам в указанное время!
+                        Я бот который записывает напоминания и присылает их Вам в указанное время!
 
-                                <em>Чтобы установить напоминание введите - <b>/settask</b> </em>
+                        <em>Чтобы установить напоминание введите - <b>/settask</b> </em>
 
-                                Я еще нахожусь в начале разработки, поэтому не судите строго! \uD83D\uDE09
-                                """, "start2");
+                        Я еще нахожусь в начале разработки, поэтому не судите строго! \uD83D\uDE09
+                        """, "start2");
                 new UserDTOActionsImpl().createFileUserDTO(update);
                 new UserDTOService().setSelfName(update);
             }

@@ -1,4 +1,4 @@
-package telegramBot.models.services;
+package telegramBot.controllers.services;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 import telegramBot.controllers.CommunicationMode;
@@ -10,8 +10,6 @@ import telegramBot.models.TasksModel;
 import telegramBot.models.UserDTO;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,15 +27,15 @@ public class TasksModelService {
         serviceFiles.setCommunicationMode(update, CommunicationMode.INPUTDATE);
     }
 
-    public void handlerTasksModelGetDate(Update update){
+    public void handlerTasksModelGetDate(Update update, String date) {
         UserDTO userDTO = new UserDTOActionsImpl().loadUserDTO(update);
-        LogsConfiguration.writeLog("Запущен метод handlerTasksModelGetDate для " + update.getMessage().getFrom().getUserName());
-        Long nameFile = serviceFiles.checkFilesTasksNoDateOutput(update.getMessage().getFrom().getId()); // возвращает имя файла в котором DateOutput = NULL
+        LogsConfiguration.writeLog("Запущен метод handlerTasksModelGetDate для " + update.getCallbackQuery().getFrom().getId());
+        Long nameFile = serviceFiles.checkFilesTasksNoDateOutput(update.getCallbackQuery().getFrom().getId()); // возвращает имя файла в котором DateOutput = NULL
         TasksModelActionsImpl tasksModelActions = new TasksModelActionsImpl();
-        TasksModel tasksModel = tasksModelActions.loadTask(update.getMessage().getFrom().getId(), nameFile); //загружает TasksModel из этого файла
+        TasksModel tasksModel = tasksModelActions.loadTask(update.getCallbackQuery().getFrom().getId(), nameFile); //загружает TasksModel из этого файла
         tasksModel.setDateOutput(
-                (new ConversionDate().unconversionDate(editDateOutput(update.getMessage().getText())) - userDTO.getGmt() * 3600L) + (4 * 3600L)); // присваевает DateOutput значение из update конвертировав его в Long
-        tasksModelActions.saveTask(update.getMessage().getFrom().getId(), tasksModel); //сохраняет tasksModel в данный файл
+                (new ConversionDate().unconversionDate(editDateOutput(date)) - userDTO.getGmt() * 3600L) + (4 * 3600L)); // присваевает DateOutput значение из update конвертировав его в Long
+        tasksModelActions.saveTask(update.getCallbackQuery().getFrom().getId(), tasksModel); //сохраняет tasksModel в данный файл
         serviceFiles.setCommunicationMode(update, CommunicationMode.DEFAULT); // возвращает CommunicationMode в DEFAULT
     }
 

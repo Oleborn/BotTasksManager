@@ -2,12 +2,12 @@ package telegramBot.controllers.textHadler.implementation.inputProfile;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 import telegramBot.controllers.CommunicationMode;
-import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
 import telegramBot.controllers.output.OutputsMethods;
-import telegramBot.controllers.services.ServiceFiles;
-import telegramBot.controllers.services.UserDTOService;
+import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
 import telegramBot.controllers.textHadler.TextHandler;
 import telegramBot.models.UserDTO;
+import telegramBot.controllers.services.ServiceFiles;
+import telegramBot.controllers.services.UserDTOService;
 
 public class TextHandlerInputSelfName implements TextHandler {
     UserDTOActionsImpl userDTOActions = new UserDTOActionsImpl();

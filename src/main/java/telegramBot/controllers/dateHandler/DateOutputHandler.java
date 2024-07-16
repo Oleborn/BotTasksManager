@@ -1,19 +1,16 @@
 package telegramBot.controllers.dateHandler;
 
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import telegramBot.controllers.OutputsMethods;
 import telegramBot.controllers.filesController.implementations.TasksModelActionsImpl;
+import telegramBot.controllers.output.OutputsMethods;
+import telegramBot.controllers.services.ConversionDate;
+import telegramBot.controllers.services.ScannersFiles;
 import telegramBot.models.TasksModel;
-import telegramBot.models.services.ConversionDate;
-import telegramBot.models.services.ScannersFiles;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.time.Instant;
 import java.util.List;
 
 public class DateOutputHandler {
-    public void DateOutputHandler() throws TelegramApiException, IOException, ParseException {
+    public void dateOutputHandler() {
         List<TasksModel> allTasksModels = new ScannersFiles().scannerTasksForSearchDateOutput(); //создает список всех имеющихся неотправленных тасков
         if (!allTasksModels.isEmpty()) { // проверка на отсутвие неотправленных
             long count = 0;

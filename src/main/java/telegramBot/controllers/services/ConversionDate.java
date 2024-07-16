@@ -1,4 +1,4 @@
-package telegramBot.models.services;
+package telegramBot.controllers.services;
 
 import telegramBot.logs.LogsConfiguration;
 

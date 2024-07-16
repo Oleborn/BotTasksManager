@@ -1,4 +1,4 @@
-package telegramBot.models.services;
+package telegramBot.controllers.services;
 
 import telegramBot.controllers.filesController.implementations.TasksModelActionsImpl;
 import telegramBot.models.TasksModel;
@@ -8,18 +8,22 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ScannersFiles {
 
-    public List<Long> scannerIdUsers() throws IOException {
+    public List<Long> scannerIdUsers() {
 
         List<Long> listNamesUsers = new ArrayList<>();
         String userFilesPath = "src/main/resources/UsersFiles/";
-        DirectoryStream<Path> stream = Files.newDirectoryStream(Path.of(userFilesPath));
+        DirectoryStream<Path> stream = null;
+        try {
+            stream = Files.newDirectoryStream(Path.of(userFilesPath));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         for (Path entry : stream) {
             if (Files.isDirectory(entry)) {
                 String name = entry.getFileName().toString();
@@ -29,7 +33,7 @@ public class ScannersFiles {
         return listNamesUsers;
     }
 
-    public List<TasksModel> scannerTasksForSearchDateOutput() throws IOException, ParseException {
+    public List<TasksModel> scannerTasksForSearchDateOutput() {
         List<TasksModel> allTasksModel = new ArrayList<>();
         List<Long> listIdUsers = scannerIdUsers();
         for (Long listIdUser : listIdUsers) {
@@ -37,7 +41,7 @@ public class ScannersFiles {
             String pathTasks = "src/main/resources/UsersFiles/" + listIdUser + "/tasks/"; // создает путь к таскам конкретного пользователя
             File fileFolder = new File(pathTasks); // получает данные по пути в формате File
             File[] listNameFiles = fileFolder.listFiles(); //сохраняет их в массив файлов
-            for (int j = 0; j < Objects.requireNonNull(listNameFiles).length; j++) { // перебираем вксь список имен файлов в формате File
+            for (int j = 0; j < Objects.requireNonNull(listNameFiles).length; j++) { // перебираем весь список имен файлов в формате File
                 String[] name = listNameFiles[j].getName().split("\\."); // сплитит от названия таски .txt
                 listNames.add(Long.valueOf(name[0])); //сохраняем в список имен в формате Long
             }

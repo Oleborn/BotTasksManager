@@ -1,4 +1,4 @@
-package telegramBot.models.services;
+package telegramBot.controllers.services;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 import telegramBot.controllers.CommunicationMode;
@@ -8,10 +8,8 @@ import telegramBot.models.TasksModel;
 import telegramBot.models.UserDTO;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +29,7 @@ public class ServiceFiles {
         new UserDTOActionsImpl().saveUserDTO(update, userDTO);
     }
 
-    public Long checkFilesTasksNoDateOutput(Long id){
+    public Long checkFilesTasksNoDateOutput(Long id) {
         String pathTasks = "src/main/resources/UsersFiles/" + id + "/tasks/"; // создает путь к таскам конкретного пользователя
         Long nameFile = null;
         File fileFolder = new File(pathTasks); // получает данные по пути в формате File

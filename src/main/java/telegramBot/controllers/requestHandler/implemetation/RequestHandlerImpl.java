@@ -1,28 +1,23 @@
 package telegramBot.controllers.requestHandler.implemetation;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import telegramBot.controllers.requestHandler.RequestHandler;
 import telegramBot.logs.LogsConfiguration;
 
-import java.io.IOException;
-import java.text.ParseException;
-
 public class RequestHandlerImpl implements RequestHandler {
     @Override
-    public void requestHandler(Update update) throws TelegramApiException, IOException, ParseException, InterruptedException {
-        if (update.hasMessage()){
-            LogsConfiguration.writeLog("Поступил message от "+update.getMessage().getFrom().getUserName()+
-                    "(id - "+update.getMessage().getFrom().getId() +") " +" с текстом - "+ update.getMessage().getText());
+    public void requestHandler(Update update) {
+        if (update.hasMessage()) {
+            LogsConfiguration.writeLog("Поступил message от " + update.getMessage().getFrom().getUserName() +
+                    "(id - " + update.getMessage().getFrom().getId() + ") " + " с текстом - " + update.getMessage().getText());
 
             new RequestHandlerMessage().requestHandler(update);
         } else if (update.hasCallbackQuery()) {
-            LogsConfiguration.writeLog("Поступил command от "+update.getCallbackQuery().getFrom().getUserName()+
-                    "(id - "+update.getCallbackQuery().getFrom().getId() +") " +" с текстом - "+ update.getCallbackQuery().getData());
+            LogsConfiguration.writeLog("Поступил command от " + update.getCallbackQuery().getFrom().getUserName() +
+                    "(id - " + update.getCallbackQuery().getFrom().getId() + ") " + " с текстом - " + update.getCallbackQuery().getData());
 
             new RequestHandlerCallbackQuery().requestHandler(update);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Необрабатываемый тип сообщения");
         }
     }

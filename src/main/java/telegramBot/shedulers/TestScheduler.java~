@@ -14,7 +14,7 @@ public class TestScheduler {
             count++;
             Thread.sleep(30000);
             LogsConfiguration.writeLog("С последнего запуска прошло - " + count * 30 + " секунд!");
-            new DateOutputHandler().dateOutputHandler();
+            new DateOutputHandler().DateOutputHandler();
         }
     }
 }

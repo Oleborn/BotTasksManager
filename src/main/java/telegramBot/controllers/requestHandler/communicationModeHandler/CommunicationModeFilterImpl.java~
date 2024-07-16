@@ -1,8 +1,8 @@
 package telegramBot.controllers.requestHandler.communicationModeHandler;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
-import telegramBot.controllers.services.ServiceFiles;
 import telegramBot.controllers.textHadler.implementation.TextHandlerDefault;
 import telegramBot.controllers.textHadler.implementation.inputProfile.TextHandlerInputGMT;
 import telegramBot.controllers.textHadler.implementation.inputProfile.TextHandlerInputSelfName;
@@ -11,11 +11,15 @@ import telegramBot.controllers.textHadler.implementation.inputTasks.TextHandlerI
 import telegramBot.controllers.textHadler.implementation.inputTasks.TextHandlerUpdateDate;
 import telegramBot.controllers.textHadler.implementation.inputTasks.TextHandlerUpdateText;
 import telegramBot.models.UserDTO;
+import telegramBot.controllers.services.ServiceFiles;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 public class CommunicationModeFilterImpl implements CommunicationModeFilter {
 
     @Override
-    public void filter(Update update) {
+    public void filter(Update update){
         UserDTO userDTO;
         if (!new ServiceFiles().checkExistsFiles(update, "src/main/resources/UsersFiles/", update.getMessage().getFrom().getUserName() + ".txt")) {
             new TextHandlerDefault().textHandlerToCommunicationMode(update);

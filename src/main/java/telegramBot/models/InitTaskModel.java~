@@ -3,6 +3,7 @@ package telegramBot.models;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

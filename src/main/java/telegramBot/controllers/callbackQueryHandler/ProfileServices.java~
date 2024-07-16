@@ -2,11 +2,11 @@ package telegramBot.controllers.callbackQueryHandler;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 import telegramBot.controllers.CommunicationMode;
-import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
 import telegramBot.controllers.output.InlineKeyboardBuilder;
 import telegramBot.controllers.output.OutputsMethods;
-import telegramBot.controllers.services.ServiceFiles;
+import telegramBot.controllers.filesController.implementations.UserDTOActionsImpl;
 import telegramBot.models.UserDTO;
+import telegramBot.controllers.services.ServiceFiles;
 
 public class ProfileServices {
 
@@ -15,11 +15,11 @@ public class ProfileServices {
         new OutputsMethods().outputMessage(update.getCallbackQuery().getFrom().getId(),
                 """
                         <b>Ваш профиль:</b>
-                                                
+                        
                         <i>Имя которым Вы любите себя называть</i> - <b>%s</b>
-                                                
+                        
                         <i>Ваш ID</i> - <b>%d</b>
-                                                
+                        
                         <i>Разница с Москвой</i>  <b>%d</b> <i>часа(ов).</i>
                         """.formatted(userDTO.getSelfName(), userDTO.getId(), userDTO.getGmt()),
                 new InlineKeyboardBuilder()
@@ -41,15 +41,15 @@ public class ProfileServices {
     public void deleteProfile(Update update) {
         new OutputsMethods().outputMessage(update.getCallbackQuery().getFrom().getId(),
                 """
-                        <b>/Бот/</b>
-                                        
-                        <em>Да ладно тебе, какой удалить? </em>
-                        <em>Оставайся, со мной интересно же!😏</em>
-                                        
-                        <i>Не гони давай,  🫵  ты нужен здесь!</i>
-                                        
-                        <i><b>Жмакай лучше /start!</b></i>
-                        """);
+                <b>/Бот/</b>
+                
+                <em>Да ладно тебе, какой удалить? </em>
+                <em>Оставайся, со мной интересно же!😏</em>
+                
+                <i>Не гони давай,  🫵  ты нужен здесь!</i>
+                
+                <i><b>Жмакай лучше /start!</b></i>
+                """);
     }
 
     public void editNameProfiles(Update update) {
@@ -59,10 +59,10 @@ public class ProfileServices {
         new ServiceFiles().setCommunicationMode(update, CommunicationMode.INPUTNAME);
         new OutputsMethods().outputMessage(update.getCallbackQuery().getFrom().getId(),
                 """
-                        <em>Ну вводи свое новое имя!😉 
-                                            
-                         Я записываю!</em>
-                            """);
+                    <em>Ну вводи свое новое имя!😉 
+                    
+                     Я записываю!</em>
+                        """);
     }
 
     public void editGmtProfiles(Update update) {

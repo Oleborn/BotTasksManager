@@ -1,8 +1,8 @@
 package telegramBot.controllers.filesController.implementations.parseFiles.userDto;
 
-import telegramBot.controllers.services.ConversionDate;
 import telegramBot.logs.LogsConfiguration;
 import telegramBot.models.TasksModel;
+import telegramBot.controllers.services.ConversionDate;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,21 +10,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
 public class ParseFilesTasks {
     ConversionDate conversionDate = new ConversionDate();
-
     public void parseFileTasks(Long id, TasksModel tasksModel, String path) {
         LogsConfiguration.writeLog("Запущен метод parseFileTasks для " + id);
         String dateRec = conversionDate.conversionDate(tasksModel.getDateCreate());
         String dateOut = conversionDate.conversionDate(tasksModel.getDateOutput());
         try {
             Files.writeString(Path.of(path + id + "/tasks/" + tasksModel.getDateCreate() + ".txt"),
-                    "Id☼" + id + "\n"
-                            + "Date_Of_Recording☼" + dateRec + "\n"
-                            + "Date_Output☼" + dateOut + "\n"
+                        "Id☼" +id+ "\n"
+                            +"Date_Of_Recording☼" +dateRec+ "\n"
+                            + "Date_Output☼"  +dateOut+ "\n"
                             + "StatusOutput☼" + tasksModel.getStatusOutput() + "\n"
                             + "StatusUpdated☼" + tasksModel.getStatusUpdated() + "\n"
                             + "Text_reminder☼" + tasksModel.getText() + "\n"
@@ -37,14 +37,14 @@ public class ParseFilesTasks {
     }
 
     public TasksModel unparseFileTasks(Long id, Long createTask, String path) {
-        LogsConfiguration.writeLog("Запущен метод unparseFileTasks для " + id + " по номеру таски " + createTask);
+        LogsConfiguration.writeLog("Запущен метод unparseFileTasks для " + id+" по номеру таски "+createTask);
         TasksModel tasksModel = new TasksModel();
         List<String> lines = null;
-        try {
-            lines = Files.readAllLines(Paths.get(path + id + "/tasks/" + createTask + ".txt"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            try {
+                lines = Files.readAllLines(Paths.get(path + id + "/tasks/" + createTask + ".txt"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         HashMap<String, String> entityMap = new HashMap<>();
         String[] parts = new String[lines.size()];
         for (int i = 0; i < lines.size(); i++) {
